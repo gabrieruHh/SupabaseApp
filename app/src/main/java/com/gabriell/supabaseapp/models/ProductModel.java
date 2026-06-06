@@ -3,23 +3,23 @@ package com.gabriell.supabaseapp.models;
 public class ProductModel {
 
     private String id;
-    private String name;
-    private double price;
+    private String nome;
+    private double preco;
     private String created_at;
 
     public ProductModel() {
     }
 
-    public ProductModel(String id, String name, double price, String created_at) {
+    public ProductModel(String id, String nome, double preco, String created_at) {
         this.id = id;
-        this.name = name;
-        this.price = price;
+        this.nome = nome;
+        this.preco = preco;
         this.created_at = created_at;
     }
 
     @Override
     public String toString() {
-        return name + " - R$ " + price;
+        return nome + " - R$ " + preco;
     }
 
     public String getId() {
@@ -31,19 +31,19 @@ public class ProductModel {
     }
 
     public String getName() {
-        return name;
+        return nome;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nome = name;
     }
 
     public double getPrice() {
-        return price;
+        return preco;
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        this.preco = price;
     }
 
     public String getCreated_at() {
