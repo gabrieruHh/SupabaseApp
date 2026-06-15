@@ -13,52 +13,43 @@ public class SupabaseClient {
 
     private final OkHttpClient client = new OkHttpClient();
 
-    //GET ALL PRODUCTS (GET)
-    public void getProducts(Callback callback){
+    // GET ALL PRODUCTS
+    public void getProducts(Callback callback) {
         Request request = new Request.Builder()
                 .url(SUPABASE_URL + "/rest/v1/produtos?select=*")
                 .addHeader("apikey", ANON_KEY)
-                .addHeader("Authorization", "Bearer " + ANON_KEY)
+                .addHeader("Authorization", "Bearer " + ANON_KEY) // ✅ espaço
                 .build();
 
         client.newCall(request).enqueue(callback);
     }
 
-    //INSERT NEW PRODUCT(POST)
-    public void insertnewProduct(String name, double price, Callback callback){
-
-        //CRIAÇÃO DO CORPO DE REQUISIÇÃO EM FORMATO JSON
+    // INSERT NEW PRODUCT
+    public void insertnewProduct(String name, double price, Callback callback) {
         String json = "{\"nome\":\"" + name + "\",\"preco\":" + price + "}";
 
-        //CRIA O CORPO DA REQUISIÇÃO HTTP DIZENDO QUE O CONTEUDO É DO TIPO JSON
-        RequestBody bory = RequestBody.create(
+        RequestBody body = RequestBody.create(
                 json, MediaType.parse("application/json")
         );
 
-        //INICIA A CONSTRUÇÃO DA REQUISIÇAÕ HTTP
         Request request = new Request.Builder()
-                //Define a URL de destino. SUPABASE_URL é uma constante com a URL base do seu
-                // projeto no Supabase, e /rest/v1/produtos é o endpoint da tabela produtos.
-                .url(SUPABASE_URL + "rest/v1/produtos")
-                //Envia a chave pública do Supabase para identificar o projeto.
+                .url(SUPABASE_URL + "/rest/v1/produtos") // ✅ barra adicionada
                 .addHeader("apikey", ANON_KEY)
-                //Cabeçalho de autenticação. O Bearer indica que é um token do tipo JWT, exigido pelo Supabase para autorizar a operação.
-                .addHeader("Authorization", "Bearer" + ANON_KEY)
-                //INFORMA O SERVIDOR QUE O CORPO ENVIADO ESTÁ EM FOMATO JSON
+                .addHeader("Authorization", "Bearer " + ANON_KEY) // ✅ espaço
                 .addHeader("Content-Type", "application/json")
-                //Cabeçalho de autenticação. O Bearer indica que é um token do tipo JWT, exigido pelo Supabase para autorizar a operação.
                 .addHeader("Prefer", "return=representation")
-                .post(bory).build();
+                .post(body)
+                .build();
 
         client.newCall(request).enqueue(callback);
     }
 
-    //DELETAR PRODUTO POR ID(DELETE)
-    public void deleteProduct(String id, Callback callback){
+    // DELETE PRODUCT
+    public void deleteProduct(String id, Callback callback) {
         Request request = new Request.Builder()
                 .url(SUPABASE_URL + "/rest/v1/produtos?id=eq." + id)
                 .addHeader("apikey", ANON_KEY)
-                .addHeader("Authorization", "Bearer" + ANON_KEY)
+                .addHeader("Authorization", "Bearer " + ANON_KEY) // ✅ espaço
                 .delete()
                 .build();
 

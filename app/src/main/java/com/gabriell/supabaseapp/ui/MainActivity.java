@@ -2,6 +2,7 @@ package com.gabriell.supabaseapp.ui;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         buscarProduto();
+        binding.btnAdd.setOnClickListener(v -> {
+            inserirProduto();
+        });
 
     }
 
@@ -56,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Gson gson = new Gson();
-                Type listType = new TypeToken<List<ProductModel>>(){}.getType();
+                Type listType = new TypeToken<List<ProductModel>>() {
+                }.getType();
                 List<ProductModel> productModels = gson.fromJson(bory, listType);
 
                 // ✅ Verificar se a lista veio vazia
@@ -70,6 +75,61 @@ public class MainActivity extends AppCompatActivity {
                     sb.append(p.toString()).append("\n");
                 }
                 runOnUiThread(() -> binding.txtProducts.setText(sb.toString()));
+            }
+        });
+    }
+
+    void inserirProduto() {
+        String nomeProduto = binding.edItemNome.getText().toString().trim();
+        String precoStr = binding.edItemPreco.getText().toString().trim();
+
+        if (nomeProduto.isEmpty()) {
+            binding.edItemNome.setError("Informe o nome do produto");
+            return;
+        }
+        if (precoStr.isEmpty()) {
+            binding.edItemPreco.setError("Informe o preço");
+            return;
+        }
+
+        double precoProduto;
+        try {
+            precoProduto = Double.parseDouble(precoStr);
+        } catch (NumberFormatException e) {
+            binding.edItemPreco.setError("Preço inválido");
+            return;
+        }
+
+        supabaseClient.insertnewProduct(nomeProduto, precoProduto, new Callback() {
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                // ✅ runOnUiThread obrigatório aqui
+                runOnUiThread(() ->
+                        Toast.makeText(MainActivity.this,
+                                "Erro de conexão: " + e.getMessage(),
+                                Toast.LENGTH_LONG).show()
+                );
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String body = response.body().string();
+
+                runOnUiThread(() -> {
+                    if (response.isSuccessful()) {
+                        binding.edItemNome.setText("");
+                        binding.edItemPreco.setText("");
+                        Toast.makeText(MainActivity.this,
+                                "Produto inserido com sucesso!",
+                                Toast.LENGTH_SHORT).show();
+                        buscarProduto();
+                    } else {
+                        Toast.makeText(MainActivity.this,
+                                "Erro " + response.code() + ": " + body,
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }
