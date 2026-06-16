@@ -7,49 +7,60 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:id="@+id/txtProducts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edItemNome"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Adicione o nome do produto"
-        android:gravity="center"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/edItemPreco" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edItemPreco"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Adicione o preço do produto"
-        android:gravity="center"
-        android:inputType="numberDecimal"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnAdd" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Adicionar item"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="vertical"/>
+
+            <EditText
+                android:id="@+id/edItemNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Adicione o nome do produto"
+                android:gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/edItemPreco" />
+
+            <EditText
+                android:id="@+id/edItemPreco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Adicione o preço do produto"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btnAdd" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adicionar item"
+                android:layout_marginBottom="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

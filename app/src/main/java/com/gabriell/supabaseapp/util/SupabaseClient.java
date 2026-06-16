@@ -45,7 +45,7 @@ public class SupabaseClient {
     }
 
     // DELETE PRODUCT
-    public void deleteProduct(String id, Callback callback) {
+    public void deletarProduto(String id, Callback callback) {
         Request request = new Request.Builder()
                 .url(SUPABASE_URL + "/rest/v1/produtos?id=eq." + id)
                 .addHeader("apikey", ANON_KEY)
