@@ -9,7 +9,7 @@ import java.net.PortUnreachableException;
 public class SupabaseClient {
 
     private static final String SUPABASE_URL = "https://qyvlhxdvodnvnogklvxl.supabase.co";
-    private static final String ANON_KEY = "sb_publishable_GxPaogInirJuioUKOLJzbQ_zlHMxTo_";
+    private static final String ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5dmxoeGR2b2Rudm5vZ2tsdnhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg2MjQwNjIsImV4cCI6MjA5NDIwMDA2Mn0.QvbQ6RUbxHVtIfaBKre_f1Jp5F_ieieNRRX4WNR6irw";
 
     private final OkHttpClient client = new OkHttpClient();
 
