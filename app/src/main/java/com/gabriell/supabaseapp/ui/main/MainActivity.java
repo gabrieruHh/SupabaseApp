@@ -1,7 +1,6 @@
-package com.gabriell.supabaseapp.ui;
+package com.gabriell.supabaseapp.ui.main;
 
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
